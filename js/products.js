@@ -1,186 +1,256 @@
-// Sample Products Database
-const PRODUCTS = [
+// Products Database
+const products = [
     {
         id: 1,
-        name: "Wireless Headphones",
+        name: 'Wireless Headphones',
         price: 79.99,
-        category: "electronics",
-        description: "High-quality wireless headphones with noise cancellation",
-        image: "🎧",
-        rating: 4.5,
-        reviews: 128
+        category: 'Electronics',
+        description: 'Premium wireless headphones with noise cancellation',
+        icon: '🎧'
     },
     {
         id: 2,
-        name: "Smart Watch",
+        name: 'Smart Watch',
         price: 199.99,
-        category: "electronics",
-        description: "Feature-rich smartwatch with health tracking",
-        image: "⌚",
-        rating: 4.3,
-        reviews: 95
+        category: 'Electronics',
+        description: 'Advanced smartwatch with health tracking features',
+        icon: '⌚'
     },
     {
         id: 3,
-        name: "Laptop Stand",
+        name: 'Laptop Stand',
         price: 34.99,
-        category: "home",
-        description: "Ergonomic aluminum laptop stand",
-        image: "💻",
-        rating: 4.7,
-        reviews: 203
+        category: 'Home',
+        description: 'Adjustable laptop stand for better ergonomics',
+        icon: '💻'
     },
     {
         id: 4,
-        name: "USB-C Cable",
+        name: 'USB-C Cable',
         price: 12.99,
-        category: "electronics",
-        description: "Durable 6ft USB-C charging cable",
-        image: "🔌",
-        rating: 4.4,
-        reviews: 542
+        category: 'Electronics',
+        description: 'High-speed USB-C charging and data cable',
+        icon: '🔌'
     },
     {
         id: 5,
-        name: "Yoga Mat",
+        name: 'Yoga Mat',
         price: 29.99,
-        category: "sports",
-        description: "Non-slip yoga mat with carrying strap",
-        image: "🧘",
-        rating: 4.6,
-        reviews: 156
+        category: 'Sports',
+        description: 'Non-slip yoga mat for workouts and fitness',
+        icon: '🧘'
     },
     {
         id: 6,
-        name: "Coffee Mug",
+        name: 'Coffee Mug',
         price: 14.99,
-        category: "home",
-        description: "Premium stainless steel coffee mug",
-        image: "☕",
-        rating: 4.2,
-        reviews: 89
+        category: 'Home',
+        description: 'Ceramic coffee mug with heat-resistant design',
+        icon: '☕'
     },
     {
         id: 7,
-        name: "Running Shoes",
+        name: 'Running Shoes',
         price: 89.99,
-        category: "sports",
-        description: "Comfortable running shoes with cushioning",
-        image: "👟",
-        rating: 4.5,
-        reviews: 234
+        category: 'Sports',
+        description: 'Comfortable running shoes with cushioned sole',
+        icon: '👟'
     },
     {
         id: 8,
-        name: "T-Shirt",
+        name: 'T-Shirt',
         price: 19.99,
-        category: "clothing",
-        description: "Comfortable 100% cotton t-shirt",
-        image: "👕",
-        rating: 4.3,
-        reviews: 178
+        category: 'Clothing',
+        description: 'Premium cotton t-shirt in various colors',
+        icon: '👕'
     },
     {
         id: 9,
-        name: "Desk Lamp",
+        name: 'Desk Lamp',
         price: 44.99,
-        category: "home",
-        description: "LED desk lamp with adjustable brightness",
-        image: "💡",
-        rating: 4.4,
-        reviews: 112
+        category: 'Home',
+        description: 'LED desk lamp with adjustable brightness',
+        icon: '💡'
     },
     {
         id: 10,
-        name: "Jeans",
+        name: 'Jeans',
         price: 59.99,
-        category: "clothing",
-        description: "Classic blue jeans with perfect fit",
-        image: "👖",
-        rating: 4.5,
-        reviews: 267
+        category: 'Clothing',
+        description: 'Classic denim jeans with comfortable fit',
+        icon: '👖'
     },
     {
         id: 11,
-        name: "Backpack",
+        name: 'Backpack',
         price: 49.99,
-        category: "clothing",
-        description: "Durable backpack with multiple compartments",
-        image: "🎒",
-        rating: 4.4,
-        reviews: 198
+        category: 'Home',
+        description: 'Durable backpack with multiple compartments',
+        icon: '🎒'
     },
     {
         id: 12,
-        name: "Phone Case",
+        name: 'Phone Case',
         price: 16.99,
-        category: "electronics",
-        description: "Protective phone case with premium material",
-        image: "📱",
-        rating: 4.3,
-        reviews: 421
+        category: 'Electronics',
+        description: 'Protective phone case with stylish design',
+        icon: '📱'
     }
 ];
 
-// Function to render product card
+function getAllProducts() {
+    return products;
+}
+
+function getFeaturedProducts() {
+    return products.slice(0, 6);
+}
+
+function getProductById(id) {
+    return products.find(product => product.id === id);
+}
+
 function renderProductCard(product) {
     return `
         <div class="product-card">
-            <div class="product-image">${product.image}</div>
+            <div class="product-image">${product.icon}</div>
             <div class="product-info">
-                <div class="product-name">${product.name}</div>
-                <div class="product-description">${product.description}</div>
-                <div class="product-rating">⭐ ${product.rating} (${product.reviews} reviews)</div>
-                <div class="product-price">$${product.price.toFixed(2)}</div>
-                <div class="product-actions">
-                    <button class="btn btn-primary btn-small" onclick="addToCart(${product.id})">Add to Cart</button>
-                    <button class="btn btn-secondary btn-small" onclick="viewProduct(${product.id})">View</button>
+                <div class="product-category">${product.category}</div>
+                <h3 class="product-name">${product.name}</h3>
+                <p class="product-description">${product.description}</p>
+                <div class="product-footer">
+                    <span class="product-price">$${product.price.toFixed(2)}</span>
+                    <button class="add-to-cart-btn" onclick="addToCart(${product.id})">
+                        Add to Cart
+                    </button>
                 </div>
             </div>
         </div>
     `;
 }
 
-// Function to display products
-function displayProducts(products) {
-    const container = document.getElementById('products-grid') || document.getElementById('featured-products');
+function displayFeaturedProducts() {
+    const container = document.getElementById('featured-grid');
     if (!container) return;
 
-    if (products.length === 0) {
-        container.innerHTML = '<p style="grid-column: 1/-1; text-align: center;">No products found.</p>';
-        return;
+    const featured = getFeaturedProducts();
+    container.innerHTML = featured.map(product => renderProductCard(product)).join('');
+}
+
+function displayAllProducts(productsToShow = getAllProducts()) {
+    const container = document.getElementById('products-grid');
+    const noProducts = document.getElementById('no-products');
+    const productCount = document.getElementById('productCount');
+
+    if (!container) return;
+
+    if (productsToShow.length === 0) {
+        container.innerHTML = '';
+        noProducts.style.display = 'block';
+    } else {
+        container.innerHTML = productsToShow.map(product => renderProductCard(product)).join('');
+        noProducts.style.display = 'none';
     }
 
-    container.innerHTML = products.map(product => renderProductCard(product)).join('');
+    productCount.textContent = productsToShow.length;
 }
 
-// Function to get featured products (first 6)
-function getFeaturedProducts() {
-    return PRODUCTS.slice(0, 6);
-}
+function filterProducts() {
+    const searchInput = document.getElementById('searchInput');
+    const categoryFilters = document.querySelectorAll('.category-filter:checked');
+    const priceRange = document.getElementById('priceRange');
+    const sortSelect = document.getElementById('sortSelect');
 
-// Function to filter products
-function filterProducts(searchTerm, category, sortBy) {
-    let filtered = PRODUCTS.filter(product => {
-        const matchesSearch = product.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                            product.description.toLowerCase().includes(searchTerm.toLowerCase());
-        const matchesCategory = !category || product.category === category;
-        return matchesSearch && matchesCategory;
+    const searchTerm = searchInput ? searchInput.value.toLowerCase() : '';
+    const selectedCategories = Array.from(categoryFilters).map(input => input.value);
+    const maxPrice = priceRange ? parseFloat(priceRange.value) : 500;
+
+    let filtered = getAllProducts().filter(product => {
+        const matchesSearch = product.name.toLowerCase().includes(searchTerm) ||
+                             product.description.toLowerCase().includes(searchTerm);
+        const matchesCategory = selectedCategories.includes('all') || selectedCategories.includes(product.category);
+        const matchesPrice = product.price <= maxPrice;
+
+        return matchesSearch && matchesCategory && matchesPrice;
     });
 
-    // Sort products
-    if (sortBy === 'price-low') {
-        filtered.sort((a, b) => a.price - b.price);
-    } else if (sortBy === 'price-high') {
-        filtered.sort((a, b) => b.price - a.price);
-    } else if (sortBy === 'name') {
-        filtered.sort((a, b) => a.name.localeCompare(b.name));
+    if (sortSelect) {
+        const sortValue = sortSelect.value;
+        switch(sortValue) {
+            case 'price-asc':
+                filtered.sort((a, b) => a.price - b.price);
+                break;
+            case 'price-desc':
+                filtered.sort((a, b) => b.price - a.price);
+                break;
+            case 'name-asc':
+                filtered.sort((a, b) => a.name.localeCompare(b.name));
+                break;
+            case 'name-desc':
+                filtered.sort((a, b) => b.name.localeCompare(a.name));
+                break;
+        }
     }
 
-    return filtered;
+    displayAllProducts(filtered);
 }
 
-// Function to get product by ID
-function getProductById(id) {
-    return PRODUCTS.find(product => product.id === id);
+function clearAllFilters() {
+    const searchInput = document.getElementById('searchInput');
+    const categoryFilters = document.querySelectorAll('.category-filter');
+    const priceRange = document.getElementById('priceRange');
+    const sortSelect = document.getElementById('sortSelect');
+
+    if (searchInput) searchInput.value = '';
+    
+    categoryFilters.forEach(input => {
+        input.checked = input.value === 'all';
+    });
+
+    if (priceRange) priceRange.value = 500;
+    if (sortSelect) sortSelect.value = 'default';
+
+    filterProducts();
 }
+
+function setupFilters() {
+    const searchInput = document.getElementById('searchInput');
+    const categoryFilters = document.querySelectorAll('.category-filter');
+    const priceRange = document.getElementById('priceRange');
+    const sortSelect = document.getElementById('sortSelect');
+    const priceValue = document.getElementById('priceValue');
+
+    if (searchInput) {
+        searchInput.addEventListener('input', filterProducts);
+    }
+
+    categoryFilters.forEach(filter => {
+        filter.addEventListener('change', () => {
+            const allFilter = document.querySelector('input[value="all"]');
+            if (filter.value === 'all') {
+                categoryFilters.forEach(f => f.checked = filter.checked);
+            } else {
+                allFilter.checked = false;
+            }
+            filterProducts();
+        });
+    });
+
+    if (priceRange) {
+        priceRange.addEventListener('input', () => {
+            priceValue.textContent = priceRange.value;
+            filterProducts();
+        });
+    }
+
+    if (sortSelect) {
+        sortSelect.addEventListener('change', filterProducts);
+    }
+
+    displayAllProducts();
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    displayFeaturedProducts();
+    setupFilters();
+});

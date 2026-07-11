@@ -8,71 +8,81 @@
     <link rel="stylesheet" href="css/responsive.css">
 </head>
 <body>
-    <!-- Header/Navigation -->
+    <!-- Navigation Header -->
     <header class="header">
-        <div class="container">
-            <div class="logo">
-                <h1>🛍️ Online Shop</h1>
+        <nav class="navbar">
+            <div class="container">
+                <div class="nav-wrapper">
+                    <div class="logo">
+                        <h1>Online Shop</h1>
+                    </div>
+                    <ul class="nav-menu">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="products.html">Products</a></li>
+                        <li><a href="cart.html" class="cart-link">
+                            Cart <span class="cart-count">0</span>
+                        </a></li>
+                    </ul>
+                    <div class="hamburger">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                </div>
             </div>
-            <nav class="navbar">
-                <ul>
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="products.html">Products</a></li>
-                    <li><a href="cart.html" class="active">Cart <span id="cart-count">0</span></a></li>
-                    <li><a href="checkout.html">Checkout</a></li>
-                </ul>
-            </nav>
-        </div>
+        </nav>
     </header>
+
+    <!-- Page Title -->
+    <section class="page-title">
+        <div class="container">
+            <h1>Shopping Cart</h1>
+            <p>Review your items before checkout</p>
+        </div>
+    </section>
 
     <!-- Cart Section -->
     <section class="cart-section">
         <div class="container">
-            <h2>Shopping Cart</h2>
-            <div class="cart-wrapper">
-                <div class="cart-items">
-                    <table class="cart-table">
-                        <thead>
-                            <tr>
-                                <th>Product</th>
-                                <th>Price</th>
-                                <th>Quantity</th>
-                                <th>Total</th>
-                                <th>Action</th>
-                            </tr>
-                        </thead>
-                        <tbody id="cart-items">
-                            <!-- Cart items will be loaded here -->
-                        </tbody>
-                    </table>
-                    <div id="empty-cart" class="empty-cart" style="display: none;">
-                        <p>Your cart is empty</p>
-                        <a href="products.html" class="btn btn-primary">Continue Shopping</a>
+            <div class="cart-layout">
+                <!-- Cart Items -->
+                <main class="cart-items">
+                    <div id="cart-items-container">
+                        <!-- Cart items will be loaded here by JavaScript -->
                     </div>
-                </div>
+                    <div id="empty-cart" class="empty-cart">
+                        <div class="empty-cart-content">
+                            <p class="empty-icon">🛒</p>
+                            <h3>Your cart is empty</h3>
+                            <p>Add some amazing products to your cart!</p>
+                            <a href="products.html" class="continue-shopping-btn">Continue Shopping</a>
+                        </div>
+                    </div>
+                </main>
 
-                <!-- Cart Summary -->
-                <div class="cart-summary">
+                <!-- Order Summary -->
+                <aside class="order-summary">
                     <h3>Order Summary</h3>
                     <div class="summary-item">
                         <span>Subtotal:</span>
                         <span id="subtotal">$0.00</span>
                     </div>
                     <div class="summary-item">
+                        <span>Shipping:</span>
+                        <span id="shipping">$0.00</span>
+                    </div>
+                    <div class="summary-item">
                         <span>Tax (10%):</span>
                         <span id="tax">$0.00</span>
                     </div>
-                    <div class="summary-item">
-                        <span>Shipping:</span>
-                        <span id="shipping">$10.00</span>
-                    </div>
-                    <div class="summary-item total">
+                    <div class="summary-divider"></div>
+                    <div class="summary-total">
                         <span>Total:</span>
                         <span id="total">$0.00</span>
                     </div>
-                    <a href="checkout.html" class="btn btn-primary btn-block">Proceed to Checkout</a>
-                    <a href="products.html" class="btn btn-secondary btn-block">Continue Shopping</a>
-                </div>
+                    <a href="checkout.html" id="checkout-btn" class="checkout-btn">Proceed to Checkout</a>
+                    <a href="products.html" class="continue-shopping-link">Continue Shopping</a>
+                </aside>
             </div>
         </div>
     </section>
@@ -80,13 +90,38 @@
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
-            <p>&copy; 2024 Online Shop. All rights reserved.</p>
-            <ul class="footer-links">
-                <li><a href="#">About Us</a></li>
-                <li><a href="#">Contact</a></li>
-                <li><a href="#">Privacy Policy</a></li>
-                <li><a href="#">Terms of Service</a></li>
-            </ul>
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>About Us</h4>
+                    <p>We offer high-quality products at competitive prices with excellent customer service.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="products.html">Products</a></li>
+                        <li><a href="#">About</a></li>
+                        <li><a href="#">Contact</a></li>
+                        <li><a href="#">FAQ</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact</h4>
+                    <p>Email: support@onlineshop.com</p>
+                    <p>Phone: +1 (555) 123-4567</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Follow Us</h4>
+                    <div class="social-links">
+                        <a href="#">Facebook</a>
+                        <a href="#">Twitter</a>
+                        <a href="#">Instagram</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Online Shop. All rights reserved.</p>
+                <p>Created by Ibraheem1109</p>
+            </div>
         </div>
     </footer>
 

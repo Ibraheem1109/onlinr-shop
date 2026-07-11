@@ -8,129 +8,174 @@
     <link rel="stylesheet" href="css/responsive.css">
 </head>
 <body>
-    <!-- Header/Navigation -->
+    <!-- Navigation Header -->
     <header class="header">
-        <div class="container">
-            <div class="logo">
-                <h1>🛍️ Online Shop</h1>
+        <nav class="navbar">
+            <div class="container">
+                <div class="nav-wrapper">
+                    <div class="logo">
+                        <h1>Online Shop</h1>
+                    </div>
+                    <ul class="nav-menu">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="products.html">Products</a></li>
+                        <li><a href="cart.html" class="cart-link">
+                            Cart <span class="cart-count">0</span>
+                        </a></li>
+                    </ul>
+                    <div class="hamburger">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                </div>
             </div>
-            <nav class="navbar">
-                <ul>
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="products.html">Products</a></li>
-                    <li><a href="cart.html">Cart <span id="cart-count">0</span></a></li>
-                    <li><a href="checkout.html" class="active">Checkout</a></li>
-                </ul>
-            </nav>
-        </div>
+        </nav>
     </header>
+
+    <!-- Page Title -->
+    <section class="page-title">
+        <div class="container">
+            <h1>Checkout</h1>
+            <p>Complete your purchase</p>
+        </div>
+    </section>
 
     <!-- Checkout Section -->
     <section class="checkout-section">
         <div class="container">
-            <h2>Checkout</h2>
-            <div class="checkout-wrapper">
-                <!-- Checkout Form -->
-                <div class="checkout-form">
-                    <form id="checkout-form">
+            <div class="checkout-layout">
+                <!-- Forms -->
+                <main class="checkout-forms">
+                    <form id="checkoutForm" class="checkout-form">
                         <!-- Billing Information -->
-                        <fieldset>
-                            <legend>Billing Information</legend>
-                            <div class="form-group">
-                                <label for="firstName">First Name *</label>
-                                <input type="text" id="firstName" name="firstName" required>
+                        <div class="form-section">
+                            <h3>Billing Information</h3>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="firstName">First Name *</label>
+                                    <input type="text" id="firstName" name="firstName" required>
+                                    <span class="error-message"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label for="lastName">Last Name *</label>
+                                    <input type="text" id="lastName" name="lastName" required>
+                                    <span class="error-message"></span>
+                                </div>
                             </div>
                             <div class="form-group">
-                                <label for="lastName">Last Name *</label>
-                                <input type="text" id="lastName" name="lastName" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="email">Email *</label>
+                                <label for="email">Email Address *</label>
                                 <input type="email" id="email" name="email" required>
+                                <span class="error-message"></span>
                             </div>
                             <div class="form-group">
                                 <label for="phone">Phone Number *</label>
                                 <input type="tel" id="phone" name="phone" required>
+                                <span class="error-message"></span>
                             </div>
-                        </fieldset>
+                        </div>
 
-                        <!-- Address Information -->
-                        <fieldset>
-                            <legend>Shipping Address</legend>
+                        <!-- Shipping Address -->
+                        <div class="form-section">
+                            <h3>Shipping Address</h3>
                             <div class="form-group">
-                                <label for="address">Address *</label>
+                                <label for="address">Street Address *</label>
                                 <input type="text" id="address" name="address" required>
+                                <span class="error-message"></span>
                             </div>
                             <div class="form-group">
                                 <label for="city">City *</label>
                                 <input type="text" id="city" name="city" required>
+                                <span class="error-message"></span>
                             </div>
                             <div class="form-row">
                                 <div class="form-group">
                                     <label for="state">State/Province *</label>
                                     <input type="text" id="state" name="state" required>
+                                    <span class="error-message"></span>
                                 </div>
                                 <div class="form-group">
-                                    <label for="zip">ZIP Code *</label>
+                                    <label for="zip">Zip/Postal Code *</label>
                                     <input type="text" id="zip" name="zip" required>
+                                    <span class="error-message"></span>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="country">Country *</label>
                                 <input type="text" id="country" name="country" required>
+                                <span class="error-message"></span>
                             </div>
-                        </fieldset>
+                        </div>
 
                         <!-- Payment Information -->
-                        <fieldset>
-                            <legend>Payment Information</legend>
+                        <div class="form-section">
+                            <h3>Payment Information</h3>
                             <div class="form-group">
-                                <label for="cardName">Name on Card *</label>
+                                <label for="cardName">Cardholder Name *</label>
                                 <input type="text" id="cardName" name="cardName" required>
+                                <span class="error-message"></span>
                             </div>
                             <div class="form-group">
                                 <label for="cardNumber">Card Number *</label>
                                 <input type="text" id="cardNumber" name="cardNumber" placeholder="1234 5678 9012 3456" required>
+                                <span class="error-message"></span>
                             </div>
                             <div class="form-row">
                                 <div class="form-group">
                                     <label for="expiry">Expiry Date *</label>
                                     <input type="text" id="expiry" name="expiry" placeholder="MM/YY" required>
+                                    <span class="error-message"></span>
                                 </div>
                                 <div class="form-group">
                                     <label for="cvv">CVV *</label>
                                     <input type="text" id="cvv" name="cvv" placeholder="123" required>
+                                    <span class="error-message"></span>
                                 </div>
                             </div>
-                        </fieldset>
+                        </div>
 
-                        <button type="submit" class="btn btn-primary btn-block">Place Order</button>
+                        <!-- Terms and Conditions -->
+                        <div class="form-section">
+                            <label class="checkbox">
+                                <input type="checkbox" id="terms" name="terms" required>
+                                I agree to the Terms and Conditions and Privacy Policy
+                            </label>
+                            <span class="error-message" id="termsError"></span>
+                        </div>
+
+                        <!-- Buttons -->
+                        <div class="form-actions">
+                            <button type="button" class="back-btn" onclick="window.location.href='cart.html'">Back to Cart</button>
+                            <button type="submit" class="place-order-btn">Place Order</button>
+                        </div>
                     </form>
-                </div>
+                </main>
 
                 <!-- Order Summary -->
-                <div class="order-summary">
+                <aside class="order-summary checkout-summary">
                     <h3>Order Summary</h3>
-                    <div class="summary-items" id="summary-items">
-                        <!-- Items will be loaded here -->
+                    <div id="checkout-items" class="checkout-items">
+                        <!-- Items will be loaded here by JavaScript -->
                     </div>
+                    <div class="summary-divider"></div>
                     <div class="summary-item">
                         <span>Subtotal:</span>
-                        <span id="summary-subtotal">$0.00</span>
-                    </div>
-                    <div class="summary-item">
-                        <span>Tax (10%):</span>
-                        <span id="summary-tax">$0.00</span>
+                        <span id="checkout-subtotal">$0.00</span>
                     </div>
                     <div class="summary-item">
                         <span>Shipping:</span>
-                        <span id="summary-shipping">$10.00</span>
+                        <span id="checkout-shipping">$0.00</span>
                     </div>
-                    <div class="summary-item total">
+                    <div class="summary-item">
+                        <span>Tax (10%):</span>
+                        <span id="checkout-tax">$0.00</span>
+                    </div>
+                    <div class="summary-divider"></div>
+                    <div class="summary-total">
                         <span>Total:</span>
-                        <span id="summary-total">$0.00</span>
+                        <span id="checkout-total">$0.00</span>
                     </div>
-                </div>
+                </aside>
             </div>
         </div>
     </section>
@@ -138,15 +183,52 @@
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
-            <p>&copy; 2024 Online Shop. All rights reserved.</p>
-            <ul class="footer-links">
-                <li><a href="#">About Us</a></li>
-                <li><a href="#">Contact</a></li>
-                <li><a href="#">Privacy Policy</a></li>
-                <li><a href="#">Terms of Service</a></li>
-            </ul>
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>About Us</h4>
+                    <p>We offer high-quality products at competitive prices with excellent customer service.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="products.html">Products</a></li>
+                        <li><a href="#">About</a></li>
+                        <li><a href="#">Contact</a></li>
+                        <li><a href="#">FAQ</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact</h4>
+                    <p>Email: support@onlineshop.com</p>
+                    <p>Phone: +1 (555) 123-4567</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Follow Us</h4>
+                    <div class="social-links">
+                        <a href="#">Facebook</a>
+                        <a href="#">Twitter</a>
+                        <a href="#">Instagram</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Online Shop. All rights reserved.</p>
+                <p>Created by Ibraheem1109</p>
+            </div>
         </div>
     </footer>
+
+    <!-- Success Modal -->
+    <div id="successModal" class="modal" style="display: none;">
+        <div class="modal-content success-modal">
+            <div class="success-icon">✓</div>
+            <h2>Order Placed Successfully!</h2>
+            <p>Thank you for your purchase.</p>
+            <p class="order-number">Order #: <span id="orderNumber"></span></p>
+            <p>A confirmation email has been sent to your email address.</p>
+            <a href="index.html" class="modal-button">Continue Shopping</a>
+        </div>
+    </div>
 
     <script src="js/products.js"></script>
     <script src="js/cart.js"></script>

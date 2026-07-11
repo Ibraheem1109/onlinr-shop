@@ -1,34 +1,30 @@
-// Cart Management Functions
+const CART_STORAGE_KEY = 'cart';
+const SHIPPING_COST = 10;
+const TAX_RATE = 0.10;
 
-// Get cart from localStorage
 function getCart() {
-    const cart = localStorage.getItem('cart');
+    const cart = localStorage.getItem(CART_STORAGE_KEY);
     return cart ? JSON.parse(cart) : [];
 }
 
-// Save cart to localStorage
 function saveCart(cart) {
-    localStorage.setItem('cart', JSON.stringify(cart));
+    localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(cart));
     updateCartCount();
 }
 
-// Add item to cart
-function addToCart(productId, quantity = 1) {
+function addToCart(productId) {
     const product = getProductById(productId);
     if (!product) return;
 
-    let cart = getCart();
+    const cart = getCart();
     const existingItem = cart.find(item => item.id === productId);
 
     if (existingItem) {
-        existingItem.quantity += quantity;
+        existingItem.quantity += 1;
     } else {
         cart.push({
-            id: product.id,
-            name: product.name,
-            price: product.price,
-            image: product.image,
-            quantity: quantity
+            ...product,
+            quantity: 1
         });
     }
 
@@ -36,7 +32,6 @@ function addToCart(productId, quantity = 1) {
     showNotification(`${product.name} added to cart!`, 'success');
 }
 
-// Remove item from cart
 function removeFromCart(productId) {
     let cart = getCart();
     cart = cart.filter(item => item.id !== productId);
@@ -44,141 +39,126 @@ function removeFromCart(productId) {
     displayCart();
 }
 
-// Update item quantity
 function updateQuantity(productId, quantity) {
-    let cart = getCart();
+    const cart = getCart();
     const item = cart.find(item => item.id === productId);
 
-    if (item) {
-        if (quantity <= 0) {
-            removeFromCart(productId);
-        } else {
-            item.quantity = quantity;
-            saveCart(cart);
-            displayCart();
-        }
+    if (!item) return;
+
+    if (quantity <= 0) {
+        removeFromCart(productId);
+    } else {
+        item.quantity = quantity;
+        saveCart(cart);
+        displayCart();
     }
 }
 
-// Update cart count in header
-function updateCartCount() {
-    const cart = getCart();
-    const count = cart.reduce((total, item) => total + item.quantity, 0);
-    const cartCountElements = document.querySelectorAll('#cart-count');
-    cartCountElements.forEach(el => el.textContent = count);
-}
-
-// Calculate totals
-function calculateTotals() {
-    const cart = getCart();
-    const subtotal = cart.reduce((total, item) => total + (item.price * item.quantity), 0);
-    const tax = subtotal * 0.1; // 10% tax
-    const shipping = 10; // Fixed shipping cost
-    const total = subtotal + tax + shipping;
+function calculateTotals(cart = getCart()) {
+    const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+    const shipping = cart.length > 0 ? SHIPPING_COST : 0;
+    const tax = subtotal * TAX_RATE;
+    const total = subtotal + shipping + tax;
 
     return {
-        subtotal: subtotal,
-        tax: tax,
-        shipping: shipping,
-        total: total
+        subtotal: parseFloat(subtotal.toFixed(2)),
+        shipping: parseFloat(shipping.toFixed(2)),
+        tax: parseFloat(tax.toFixed(2)),
+        total: parseFloat(total.toFixed(2))
     };
 }
 
-// Display cart items
 function displayCart() {
+    const container = document.getElementById('cart-items-container');
+    const emptyCart = document.getElementById('empty-cart');
+    const subtotalEl = document.getElementById('subtotal');
+    const shippingEl = document.getElementById('shipping');
+    const taxEl = document.getElementById('tax');
+    const totalEl = document.getElementById('total');
+
+    if (!container) return;
+
     const cart = getCart();
-    const cartItemsContainer = document.getElementById('cart-items');
-    const emptyCartDiv = document.getElementById('empty-cart');
-    
-    if (!cartItemsContainer) return;
 
     if (cart.length === 0) {
-        cartItemsContainer.innerHTML = '';
-        if (emptyCartDiv) emptyCartDiv.style.display = 'block';
-        updateCartTotals();
+        container.innerHTML = '';
+        if (emptyCart) emptyCart.style.display = 'flex';
+        if (subtotalEl) subtotalEl.textContent = '$0.00';
+        if (shippingEl) shippingEl.textContent = '$0.00';
+        if (taxEl) taxEl.textContent = '$0.00';
+        if (totalEl) totalEl.textContent = '$0.00';
         return;
     }
 
-    if (emptyCartDiv) emptyCartDiv.style.display = 'none';
+    if (emptyCart) emptyCart.style.display = 'none';
 
-    let html = '';
-    cart.forEach(item => {
-        const itemTotal = item.price * item.quantity;
-        html += `
-            <tr>
-                <td>
-                    <div style="display: flex; align-items: center; gap: 10px;">
-                        <span style="font-size: 2rem;">${item.image}</span>
-                        <span>${item.name}</span>
-                    </div>
-                </td>
-                <td>$${item.price.toFixed(2)}</td>
-                <td>
-                    <input type="number" min="1" value="${item.quantity}" 
-                           onchange="updateQuantity(${item.id}, this.value)">
-                </td>
-                <td>$${itemTotal.toFixed(2)}</td>
-                <td>
-                    <button class="remove-btn" onclick="removeFromCart(${item.id})">Remove</button>
-                </td>
-            </tr>
-        `;
-    });
+    const cartHTML = cart.map(item => `
+        <div class="cart-item">
+            <div class="cart-item-image">${item.icon}</div>
+            <div class="cart-item-details">
+                <h4>${item.name}</h4>
+                <p>${item.description}</p>
+            </div>
+            <div class="cart-item-actions">
+                <div class="quantity-control">
+                    <button onclick="updateQuantity(${item.id}, ${item.quantity - 1})">-</button>
+                    <input type="number" value="${item.quantity}" readonly>
+                    <button onclick="updateQuantity(${item.id}, ${item.quantity + 1})">+</button>
+                </div>
+                <span class="item-price">$${(item.price * item.quantity).toFixed(2)}</span>
+                <button class="remove-btn" onclick="removeFromCart(${item.id})">Remove</button>
+            </div>
+        </div>
+    `).join('');
 
-    cartItemsContainer.innerHTML = html;
-    updateCartTotals();
+    container.innerHTML = cartHTML;
+
+    const totals = calculateTotals(cart);
+    if (subtotalEl) subtotalEl.textContent = `$${totals.subtotal.toFixed(2)}`;
+    if (shippingEl) shippingEl.textContent = `$${totals.shipping.toFixed(2)}`;
+    if (taxEl) taxEl.textContent = `$${totals.tax.toFixed(2)}`;
+    if (totalEl) totalEl.textContent = `$${totals.total.toFixed(2)}`;
 }
 
-// Update totals display
-function updateCartTotals() {
-    const totals = calculateTotals();
-    
-    const subtotalEl = document.getElementById('subtotal');
-    const taxEl = document.getElementById('tax');
-    const shippingEl = document.getElementById('shipping');
-    const totalEl = document.getElementById('total');
+function updateCartCount() {
+    const cartCountElements = document.querySelectorAll('.cart-count');
+    const cart = getCart();
+    const count = cart.reduce((sum, item) => sum + item.quantity, 0);
+
+    cartCountElements.forEach(el => {
+        el.textContent = count;
+    });
+}
+
+function displayCheckoutItems() {
+    const container = document.getElementById('checkout-items');
+    if (!container) return;
+
+    const cart = getCart();
+    const itemsHTML = cart.map(item => `
+        <div class="checkout-item">
+            <span class="checkout-item-name">${item.name}</span>
+            <span class="checkout-item-qty">x${item.quantity}</span>
+            <span class="checkout-item-price">$${(item.price * item.quantity).toFixed(2)}</span>
+        </div>
+    `).join('');
+
+    container.innerHTML = itemsHTML;
+
+    const totals = calculateTotals(cart);
+    const subtotalEl = document.getElementById('checkout-subtotal');
+    const shippingEl = document.getElementById('checkout-shipping');
+    const taxEl = document.getElementById('checkout-tax');
+    const totalEl = document.getElementById('checkout-total');
 
     if (subtotalEl) subtotalEl.textContent = `$${totals.subtotal.toFixed(2)}`;
-    if (taxEl) taxEl.textContent = `$${totals.tax.toFixed(2)}`;
     if (shippingEl) shippingEl.textContent = `$${totals.shipping.toFixed(2)}`;
+    if (taxEl) taxEl.textContent = `$${totals.tax.toFixed(2)}`;
     if (totalEl) totalEl.textContent = `$${totals.total.toFixed(2)}`;
-
-    // Update checkout page totals
-    const summarySubtotal = document.getElementById('summary-subtotal');
-    const summaryTax = document.getElementById('summary-tax');
-    const summaryShipping = document.getElementById('summary-shipping');
-    const summaryTotal = document.getElementById('summary-total');
-
-    if (summarySubtotal) summarySubtotal.textContent = `$${totals.subtotal.toFixed(2)}`;
-    if (summaryTax) summaryTax.textContent = `$${totals.tax.toFixed(2)}`;
-    if (summaryShipping) summaryShipping.textContent = `$${totals.shipping.toFixed(2)}`;
-    if (summaryTotal) summaryTotal.textContent = `$${totals.total.toFixed(2)}`;
 }
 
-// Display checkout order summary
-function displayCheckoutSummary() {
-    const cart = getCart();
-    const summaryItemsContainer = document.getElementById('summary-items');
-    
-    if (!summaryItemsContainer) return;
-
-    let html = '';
-    cart.forEach(item => {
-        const itemTotal = item.price * item.quantity;
-        html += `
-            <div class="summary-item-row">
-                <span>${item.name} x${item.quantity}</span>
-                <span>$${itemTotal.toFixed(2)}</span>
-            </div>
-        `;
-    });
-
-    summaryItemsContainer.innerHTML = html;
-    updateCartTotals();
-}
-
-// Clear cart
-function clearCart() {
-    localStorage.removeItem('cart');
+document.addEventListener('DOMContentLoaded', () => {
     updateCartCount();
-}
+    displayCart();
+    displayCheckoutItems();
+});
