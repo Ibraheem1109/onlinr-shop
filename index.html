@@ -1,142 +1,94 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Online Shop - Premium E-Commerce Store</title>
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/responsive.css">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Explore India — Top Tourist Destinations</title>
+  <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
-    <!-- Navigation Header -->
-    <header class="header">
-        <nav class="navbar">
-            <div class="container">
-                <div class="nav-wrapper">
-                    <div class="logo">
-                        <h1>Online Shop</h1>
-                    </div>
-                    <ul class="nav-menu">
-                        <li><a href="index.html" class="active">Home</a></li>
-                        <li><a href="products.html">Products</a></li>
-                        <li><a href="cart.html" class="cart-link">
-                            Cart <span class="cart-count">0</span>
-                        </a></li>
-                    </ul>
-                    <div class="hamburger">
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                    </div>
-                </div>
-            </div>
-        </nav>
-    </header>
+  <header class="site-header">
+    <div class="container">
+      <h1 class="logo">Explore India</h1>
+      <nav>
+        <a href="index.html">Home</a>
+        <a href="pages/taj-mahal.html">Taj Mahal</a>
+        <a href="pages/jaipur.html">Jaipur</a>
+        <a href="pages/goa.html">Goa</a>
+        <a href="pages/munnar.html">Munnar</a>
+        <a href="pages/leh.html">Leh & Ladakh</a>
+      </nav>
+    </div>
+  </header>
 
-    <!-- Hero Section -->
+  <main>
     <section class="hero">
-        <div class="hero-content">
-            <h2>Welcome to Online Shop</h2>
-            <p>Discover Amazing Products at Unbeatable Prices</p>
-            <a href="products.html" class="cta-button">Shop Now</a>
-        </div>
-        <div class="hero-background"></div>
+      <div class="container">
+        <h2>Discover India's iconic places</h2>
+        <p>Browse destinations, see how to travel, best spots, and top restaurants — plan your trip easily.</p>
+        <input id="searchBox" type="search" placeholder="Search destinations..." />
+      </div>
     </section>
 
-    <!-- Features Section -->
-    <section class="features">
-        <div class="container">
-            <h2>Why Shop With Us?</h2>
-            <div class="features-grid">
-                <div class="feature-card">
-                    <div class="feature-icon">🚚</div>
-                    <h3>Fast Shipping</h3>
-                    <p>Quick and reliable delivery to your doorstep</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">💰</div>
-                    <h3>Best Prices</h3>
-                    <p>Competitive pricing on all our products</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">🔒</div>
-                    <h3>Secure Checkout</h3>
-                    <p>Safe and encrypted payment processing</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">✅</div>
-                    <h3>Quality Guaranteed</h3>
-                    <p>All products are authentic and inspected</p>
-                </div>
-            </div>
-        </div>
+    <section class="grid container" id="destGrid">
+      <!-- Destination cards -->
+      <article class="card" data-title="Taj Mahal">
+        <a href="pages/taj-mahal.html">
+          <img src="https://images.unsplash.com/photo-1549899611-3a6c76438f38?w=1200&q=80&auto=format&fit=crop" alt="Taj Mahal" />
+          <h3>Taj Mahal — Agra</h3>
+          <p>Iconic white marble mausoleum and UNESCO World Heritage site.</p>
+        </a>
+      </article>
+
+      <article class="card" data-title="Jaipur">
+        <a href="pages/jaipur.html">
+          <img src="https://images.unsplash.com/photo-1542512686-7d4d28f9b9f3?w=1200&q=80&auto=format&fit=crop" alt="Jaipur" />
+          <h3>Jaipur — The Pink City</h3>
+          <p>Historic forts, palaces, and vibrant markets in Rajasthan.</p>
+        </a>
+      </article>
+
+      <article class="card" data-title="Goa">
+        <a href="pages/goa.html">
+          <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1200&q=80&auto=format&fit=crop" alt="Goa beach" />
+          <h3>Goa — Beaches & Nightlife</h3>
+          <p>Sandy beaches, seafood, and lively culture.</p>
+        </a>
+      </article>
+
+      <article class="card" data-title="Munnar">
+        <a href="pages/munnar.html">
+          <img src="https://images.unsplash.com/photo-1549880338-65ddcdfd017b?w=1200&q=80&auto=format&fit=crop" alt="Munnar" />
+          <h3>Munnar — Tea Gardens</h3>
+          <p>Lush hills and serene tea plantations in Kerala.</p>
+        </a>
+      </article>
+
+      <article class="card" data-title="Leh">
+        <a href="pages/leh.html">
+          <img src="https://images.unsplash.com/photo-1502767089025-6572583495b0?w=1200&q=80&auto=format&fit=crop" alt="Pangong Lake" />
+          <h3>Leh & Ladakh — High Altitude</h3>
+          <p>Stunning landscapes, lakes, and mountain passes.</p>
+        </a>
+      </article>
     </section>
 
-    <!-- Featured Products Section -->
-    <section class="featured-products">
-        <div class="container">
-            <h2>Featured Products</h2>
-            <div id="featured-grid" class="products-grid">
-                <!-- Products will be loaded here by JavaScript -->
-            </div>
-            <div class="view-all-container">
-                <a href="products.html" class="view-all-button">View All Products</a>
-            </div>
-        </div>
+    <section class="container about">
+      <h2>Planning tips</h2>
+      <ul>
+        <li>Check local weather and altitude for hill and mountain destinations.</li>
+        <li>Book trains and flights early during peak seasons (Oct–Mar for North India, Nov–Feb for Goa).</li>
+        <li>Respect local customs, dress codes, and shrine etiquette.</li>
+      </ul>
     </section>
+  </main>
 
-    <!-- Newsletter Section -->
-    <section class="newsletter">
-        <div class="container">
-            <h2>Subscribe to Our Newsletter</h2>
-            <p>Get updates on new products and special offers</p>
-            <form class="newsletter-form">
-                <input type="email" placeholder="Enter your email" required>
-                <button type="submit" class="subscribe-button">Subscribe</button>
-            </form>
-        </div>
-    </section>
+  <footer class="site-footer">
+    <div class="container">
+      <p>© 2026 Explore India — Sample site. Images: Unsplash (replace with your own licensed images)</p>
+    </div>
+  </footer>
 
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <h4>About Us</h4>
-                    <p>We offer high-quality products at competitive prices with excellent customer service.</p>
-                </div>
-                <div class="footer-section">
-                    <h4>Quick Links</h4>
-                    <ul>
-                        <li><a href="products.html">Products</a></li>
-                        <li><a href="#">About</a></li>
-                        <li><a href="#">Contact</a></li>
-                        <li><a href="#">FAQ</a></li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <h4>Contact</h4>
-                    <p>Email: support@onlineshop.com</p>
-                    <p>Phone: +1 (555) 123-4567</p>
-                </div>
-                <div class="footer-section">
-                    <h4>Follow Us</h4>
-                    <div class="social-links">
-                        <a href="#">Facebook</a>
-                        <a href="#">Twitter</a>
-                        <a href="#">Instagram</a>
-                    </div>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; 2024 Online Shop. All rights reserved.</p>
-                <p>Created by Ibraheem1109</p>
-            </div>
-        </div>
-    </footer>
-
-    <script src="js/products.js"></script>
-    <script src="js/cart.js"></script>
-    <script src="js/main.js"></script>
+  <script src="js/main.js"></script>
 </body>
 </html>
